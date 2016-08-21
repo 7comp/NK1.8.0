@@ -387,7 +387,7 @@ function edit_account(){
                 . "<tr><td><b>" . _MAIL . " " . _PRIVATE . " : </b></td><td><input id=\"edit_mail\" type=\"text\" name=\"mail\" size=\"30\" maxlength=\"80\" value=\"" . $mail. "\" /> *</td></tr>\n"
                 . "<tr><td colspan=\"2\">&nbsp;</td></tr>\n"
                 . "<tr><td><b>" . _USERPASSWORD . " (" . _PASSOLD . ") :</b></td><td><input type=\"password\" name=\"pass_old\" size=\"10\" maxlength=\"15\" /> *</td></tr>\n"
-                . "<tr><td colspan=\"2\">&nbsp;</td></tr>\n";
+				. "<tr><td colspan=\"2\">&nbsp;</td></tr>\n";
 				if ($nuked['user_email'] == 'on'){echo "<tr><td><b>" . _MAIL . " " . _PUBLIC . " : </b></td><td><input type=\"text\" name=\"email\" size=\"30\" maxlength=\"80\" value=\"" . $email . "\" /></td></tr>\n";}
 				if ($nuked['user_icq'] == 'on'){echo "<tr><td><b>" . _ICQ . " : </b></td><td><input type=\"text\" name=\"icq\" size=\"30\" maxlength=\"30\" value=\"" . $icq . "\" /></td></tr>\n";}
 				if ($nuked['user_msn'] == 'on'){echo "<tr><td><b>" . _MSN . " : </b></td><td><input type=\"text\" name=\"msn\" size=\"30\" maxlength=\"80\" value=\"" . $msn . "\" /></td></tr>\n";}
@@ -847,7 +847,6 @@ function edit_pref(){
 }
 
 function login_screen(){
-
     if ($GLOBALS['user']){
         redirect("index.php?file=User", 0);
     }
@@ -1012,10 +1011,9 @@ function reg($pseudo, $mail, $email, $pass_reg, $pass_conf, $game, $country){
         $country = "France.gif";
     }
     $date2 = nkDate(time());
-    $add = mysql_query("INSERT INTO " . USER_TABLE . " ( `id` , `team` , `team2` , `team3` , `rang` , `ordre` , `pseudo` , `mail` , `email` , `icq` , `msn` , `aim` , `yim` , `url` , `pass` , `niveau` , `date` , `avatar` , `signature` , `user_theme` , `user_langue` , `game` , `country` , `count`, `xfire`, `facebook`, `origin`, `steam`, `twitter`, `skype` ) VALUES ( '" . $user_id . "' , '' , '' , '' , '' , '' , '" . $pseudo . "' , '" . $mail . "' , '" . $email . "' , '' , '' , '' , '' , '' , '" . $cryptpass . "' , '" . $niveau . "' , '" . $date . "' , '' , '' , '' , '' , '" . $game . "' , '" . $country . "' , '', '" . $xfire . "', '" . $facebook . "', '" . $origin . "', '" . $steam . "', '" . $twitter . "', '" . $skype . "'
- )");
+    $add = mysql_query("INSERT INTO " . USER_TABLE . " ( `id` , `team` , `team2` , `team3` , `rang` , `ordre` , `pseudo` , `mail` , `email` , `icq` , `msn` , `aim` , `yim` , `url` , `pass` , `niveau` , `date` , `avatar` , `signature` , `user_theme` , `user_langue` , `game` , `country` , `count`, `xfire`, `facebook`, `origin`, `steam`, `twitter`, `skype` ) VALUES ( '" . $user_id . "' , '' , '' , '' , '' , '' , '" . $pseudo . "' , '" . $mail . "' , '" . $email . "' , '' , '' , '' , '' , '' , '" . $cryptpass . "' , '" . $niveau . "' , '" . $date . "' , '' , '' , '' , '' , '" . $game . "' , '" . $country . "' , '', '" . $xfire . "', '" . $facebook . "', '" . $origin . "', '" . $steam . "', '" . $twitter . "', '" . $skype . "')");
 
-    // Mark read all topics in the forum
+	// Mark read all topics in the forum
     $_COOKIE['cookie_forum'] = '';
     $req = 'UPDATE ' . SESSIONS_TABLE . ' SET last_used = date WHERE user_id = "' . $user_id . '"';
     $sql = mysql_query($req);
@@ -1184,7 +1182,7 @@ function login($pseudo, $pass, $remember_me){
 }
 
 function login_message(){
-    global $nuked, $theme,  $bgcolor1, $bgcolor2, $bgcolor3, $cookie_session, $sessionlimit, $referer, $user_ip, $uid;
+    global $nuked, $theme,  $bgcolor1, $bgcolor2, $bgcolor3, $cookie_session, $sessionlimit, $referer, $user_ip, $user, $uid;
 
     if (isset($_COOKIE[$cookie_session]) && $_COOKIE[$cookie_session] != ""){
         $test_cookie = $_COOKIE[$cookie_session];
@@ -1205,14 +1203,17 @@ function login_message(){
 
     if ($test_cookie != ""){
         echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+				. '<script type="text/javascript" src="modules/User/user.js"></script>'
                 . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\">\n"
                 . "<head><title>" . $nuked['name'] . " :: " . $nuked['slogan'] . " ::</title>\n"
                 . "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n"
                 . "<meta http-equiv=\"content-style-type\" content=\"text/css\" />\n"
                 . "<link title=\"style\" type=\"text/css\" rel=\"stylesheet\" href=\"themes/" . $theme . "/style.css\" /></head>\n"
                 . "<body style=\"background: " . $bgcolor2 . ";\"><div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div>\n"
-                . "<table width=\"400\" style=\"margin-left: auto;margin-right: auto;text-align: left;background: " . $bgcolor3 . ";\" cellspacing=\"1\" cellpadding=\"20\">\n"
-                . "<tr><td style=\"background: " . $bgcolor1 . ";\" align=\"center\"><big><b>" . _LOGINPROGRESS . "</b></big></td></tr></table></body></html>";
+				. "<table width=\"400\" style=\"margin-left: auto;margin-right: auto;text-align: center;\" cellspacing=\"0\" cellpadding=\"20\">\n"
+				. "<tr><td><div class=\"login_succes\" style=\" align=\"center\"><big><b>" . _LOGINPROGRESS . "</b></big><br />\n"
+				. "Vous avez <b>" . $user[5] . "</b> nouveau(x) message(s).<br />\n"
+				. "Votre ip : <b>" . $user[3] . "</b><br /></div></td></tr></table></body></html>\n";
 
         redirect($url, 2);
     }
@@ -1976,7 +1977,6 @@ function delModerator($idUser)
     else
         return false;
 }
-
 
 function del_account($pass){
     global $user, $nuked;
