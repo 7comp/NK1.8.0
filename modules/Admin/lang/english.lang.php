@@ -698,4 +698,19 @@ define("_ONLINEMEMBERS","Members online");
 define("_ONLINEADMINS","Administrators onlins");
 define("_TOTALVISITS","Total viewed pages");
 
+// patch themes slide
+define("_URLT","Url of theme");
+define("_TITRE","Title of theme");
+define("_IMG","Theme image");
+define("_TSLIDEADMIN","Administration of slide themes");
+define("_SLIDEADD","theme successfully added");
+define("_SLIDENOTADD","theme not added");
+define("_ACTIONADDSLIDE","added to the theme");
+define("_EDITSLIDE","Add slide themes");
+define("_DOWNSLIDE","Download the theme");
+define("_CLICTOSCREEN","Click on the image to enlarge");
+define("_CLICTOVIEW","Click to see the description of the theme");
+define("_SLIDEEDIT","Theme edited successfully");
+define("_SLIDENOTEDIT","theme unedited");
+define("_ACTIONEDITSLIDE","published in the issue");
 ?>
