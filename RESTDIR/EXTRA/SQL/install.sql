@@ -838,6 +838,7 @@ INSERT INTO `nuked_modules` (`id`, `nom`, `niveau`, `admin`) VALUES
 (24, 'Video', 0, 9);
 (25, 'Annonces', 0, 3);
 (26, 'Facebook', 1, 9),
+(27, 'Horoscope', 1, 9);
 
 -- --------------------------------------------------------
 
