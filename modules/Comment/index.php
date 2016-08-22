@@ -63,6 +63,12 @@ function verification($module, $im_id){
         $sqlverif = "sondage";
         $specification = "sid";
 
+    elseif($module == "Video" || $module == "video"):
+        
+        $WhereModule = 'video';
+        $sqlverif = "video";
+        $specification = "id";
+
     endif;
 
     $Sql = mysql_query("SELECT active FROM " . $nuked['prefix'] . "_comment_mod WHERE module = '$WhereModule'");
