@@ -1111,7 +1111,7 @@ function login($pseudo, $pass, $remember_me){
     $checkLogin = mysql_num_rows($dbeLogin);
 
     if($checkLogin > 0){
-        // Un utilisateur pour ce pseudo a été trouvé
+        // Un utilisateur pour ce pseudo a Ã©tÃ© trouvÃ©
         $dbrLogin = mysql_fetch_assoc($dbeLogin);
 
         if($dbrLogin['nbErrors'] >= 2){
@@ -1127,7 +1127,7 @@ function login($pseudo, $pass, $remember_me){
         }
 
         if($dbrLogin['level'] > 0){
-            // Si le compte de l'utilisateur est validé
+            // Si le compte de l'utilisateur est validÃ©
             if(!Check_Hash($pass, $dbrLogin['dbPass'])){
                 $newNbErrors = $dbrLogin['nbErrors'] + 1;
                 // Si les pass ne correspondent pas
@@ -1169,14 +1169,14 @@ function login($pseudo, $pass, $remember_me){
             redirect($url, 0);
         }
         else{
-            // Si le compte n'est pas validé
+            // Si le compte n'est pas validÃ©
             nkNotification(_NOVALIDUSER, 'index.php', 2);
             exit();
         }
 
     }
     else {
-        // Aucun utilisateur trouvé pour ce pseudo
+        // Aucun utilisateur trouvÃ© pour ce pseudo
         nkNotification(_UNKNOWNUSER, 'index.php', 2);
     }
 }
@@ -1660,6 +1660,8 @@ function logout(){
     setcookie($cookie_theme, "");
     setcookie($cookie_langue, "");
     setcookie($cookie_forum, "");
+    // On cree un cookie ip pour ne ne pas reverifier a chaque connexion
+    setcookie($cookie_userip, $user_ip, $sessionlimit);
 
     $_SESSION['admin'] = false;
 

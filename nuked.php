@@ -210,56 +210,77 @@ include ('Includes/nkSessions.php');
 function banip() {
     global $user_ip, $user, $language;
 
+    if(array_key_exists(2, $user)){
+        $pseudo = $user[2];
+    }
+    else{
+        $pseudo = 'Visiteur'; // On ne doit pas laisser le pseudo vide lors de la requete
+    }
+
     // On supprime le dernier chiffre pour les IP's dynamiques
     $ip_dyn = substr($user_ip, 0, -1);
 
-    // Condition SQL : IP dynamique ou compte
-    $where_query = ' WHERE (ip LIKE "%' . $ip_dyn . '%") OR pseudo = "' . $user[2] . '"';
-
-    // Recherche d'un banissement
-    $query_ban = mysql_query('SELECT `id`, `pseudo`, `date`, `dure` FROM ' . BANNED_TABLE . $where_query);
-    $ban = mysql_fetch_assoc($query_ban);
-
-    // Si resultat positif a la recherche d'un bannissement
-    if(mysql_num_rows($query_ban) > 0) {
-        // Nouvelle adresse IP
-        $banned_ip = $user_ip;
-    }
-    // Recherche d'un cookie de banissement
-    else if(isset($_COOKIE['ip_ban']) && !empty($_COOKIE['ip_ban'])) {
+	// Recherche ip d'un eventuel cookie de banissement
+    if(isset($_COOKIE['ip_ban']) && !empty($_COOKIE['ip_ban'])) {
         // On supprime le dernier chiffre de l'adresse IP contenu dans le cookie
         $ip_dyn2 = substr($_COOKIE['ip_ban'], 0, -1);
+	// Condition SQL : IP dynamique ou compte ou cookie (on prend la plus récente pour si doublon)
+    $where_query = ' WHERE ip LIKE "%' . $ip_dyn . '%" OR ip LIKE "%' . $ip_dyn2 . '%" OR pseudo = "' . $pseudo . '"';
+	}
+	// Sinon Condition SQL : IP dynamique ou compte sans cookie (on prend la plus récente pour si doublon)
+	else  $where_query = ' WHERE ip LIKE "%' . $ip_dyn . '%" OR pseudo = "' . $pseudo . '"';
 
-        // On verifie l'adresse IP du cookie et l'adresse IP actuelle
-        if($ip_dyn2 == $ip_dyn) {
-            // On verifie l'existance du bannissement
-            $query_ban2 = mysql_query('SELECT `id` FROM ' . BANNED_TABLE . ' WHERE (ip LIKE "%' . $ip_dyn2 . '%")');
-            // Si resultat positif, on fait un nouveau ban
-            if(mysql_num_rows($query_ban2) > 0)
-                $banned_ip = $user_ip;
-        }
+    // Recherche d'un banissement
+    $query_ban = mysql_query('SELECT `id`, `ip`, `pseudo`, `email`, `date`, `dure`, `texte` FROM ' . BANNED_TABLE . $where_query);
+    $ban = mysql_fetch_assoc($query_ban);
+
+	if(!empty($ban['ip'])) $ip_ban_dyn = substr($ban['ip'], 0, -1); // Si ip déjà ban, on la dynamise
+	else $ip_ban_dyn = '';
+
+    // Si 1 résultat on vérifie qu'il ne s'agit pas d'une nouvelle ip si oui on la bannera
+    if(mysql_num_rows($query_ban) == 1) {
+
+        // Nouvelle adresse IP enregistrée
+        $banned_ip = $user_ip;
     }
+	// Si resultat egal 0 alors pas de ban, si > A 1 alors ip et pseudo sont deja� bannis (vu qu'il ne peut y avoir de doublon)
     else{
         $banned_ip = '';
     }
 
-    // Suppression des banissements depasses ou mise a jour de l'IP
+        // Suppression des banissements depasse
     if(!empty($banned_ip)) {
-        // Recherche banissement depasse
+        // Recherche si banissement depasse
         if($ban['dure'] != 0 && ($ban['date'] + $ban['dure']) < time()) {
-            // Suppression bannissement
-            $del_ban = mysql_query('DELETE FROM ' . BANNED_TABLE . $where_query);
+            // Suppression bannissement si effectivement depasse
+            $del_ban = mysql_query('DELETE FROM ' . BANNED_TABLE . ' WHERE id = "' . $ban['id'] . '"');
             // Notification dans l'administration
             $notify = mysql_query("INSERT INTO " . NOTIFICATIONS_TABLE . " (`date` , `type` , `texte`)  VALUES ('" . time() . "', 4, '" . mysql_real_escape_string($pseudo) . mysql_real_escape_string(_BANFINISHED) . "')");
         }
-        // Sinon on met a jour l'IP
+        // Sinon on verifie que ce n est pas une nouvelle ip si oui on la ban aussi
         else {
-            $where_user = $user ? ', pseudo = "' . $user[2] . '"' : '';
-            $upd_ban = mysql_query('UPDATE ' . BANNED_TABLE . ' SET ip = "' . $user_ip . '"' . $where_user . ' ' . $where_query);
+			// Si duree pas infinie on l'adapte par rapport a la date de mtn pour garder une trace des dates de ban
+			if($ban['dure'] != 0) $dure = $ban['dure'] - (time() - $ban['date']);
+			else $dure = $ban['dure'];
+
+			// Si Pseudo ban sans ip, on lui ajoute l'ip et inversement
+            if($ban['ip'] == '' && $ban['pseudo'] != '') $upd_ban = mysql_query('UPDATE ' . BANNED_TABLE . ' SET ip = "' . $user_ip . '" WHERE id = "' . $ban['id'] . '"');
+			elseif($ip_ban_dyn == $ip_dyn && $ban['ip'] != '' && $ban['pseudo'] == '' && !empty($user)) $upd_ban = mysql_query('UPDATE ' . BANNED_TABLE . ' SET  pseudo = "' . $pseudo . '" WHERE id = "' . $ban['id'] . '"');
+			// Si ip differente et pseudo existant on rajoute la nouvelle ip sauf si dyn car inutile et on y transfere le pseudo pour éviter les doublons cookie
+			elseif($ip_ban_dyn != $ip_dyn && $ban['pseudo'] != '') { $ins_ban = mysql_query("INSERT INTO " . BANNED_TABLE . " ( `id` , `ip` , `pseudo` , `email` ,`date` ,`dure` , `texte` ) VALUES ( '' , '" . $user_ip . "' , '" . $ban['pseudo'] . "' , '" . $ban['email'] . "', '" . time() . "' , '" . $dure . "' , '" . $ban['texte'] . "' )");
+			// On enleve ensuite le pseudo de la precedente adresse ip mais on ajoute au texte le pseudo pour se rappeler qui c'est
+			$upd_ban = mysql_query('UPDATE ' . BANNED_TABLE . ' SET  pseudo = "", texte = "Compte ' . $ban['pseudo'] . ' : ' . $ban['texte'] . '" WHERE id = "' . $ban['id'] . '"');
+			}
+			// Meme chose sauf que si pas de pseudo on ajoute uniquement la nouvelle ip
+			elseif($ip_ban_dyn != $ip_dyn && $ban['pseudo'] == '') { $ins_ban = mysql_query("INSERT INTO " . BANNED_TABLE . " ( `id` , `ip` , `pseudo` , `email` ,`date` ,`dure` , `texte` ) VALUES ( '' , '" . $user_ip . "' , '' , '" . $ban['email'] . "', '" . time() . "' , '" . $dure . "' , '" . $ban['texte'] . "' )");
+			}
             // Redirection vers la page de banissement
             $url_ban = 'ban.php?ip_ban=' . $banned_ip;
-            if(!empty($user)){
-                $url_ban .= '&user=' . urlencode($user[2]);
+            if(!empty($user) && $ban['pseudo'] == ''){
+                $url_ban .= '&user=' . urlencode($pseudo);
+            }
+			elseif(empty($user) && $ban['pseudo'] != ''){
+                $url_ban .= '&user=' . urlencode($ban['pseudo']);
             }
             redirect($url_ban, 0);
         }
@@ -594,7 +615,7 @@ function secu_args($matches){
         'address' => array()
     );
 
-        // FOR VIDEO PLUGIN -- POUR PLUGIN VIDEO
+    // FOR VIDEO PLUGIN -- POUR PLUGIN VIDEO
     $TabVideo = array(
         'object' => array(
             'width',
@@ -751,6 +772,7 @@ function redirect($url, $tps){
 
 // DISPLAYS THE NUMBER OF PAGES
 function number($count, $each, $link){
+	$link = str_replace( '%', '%%', $link);
 
     $current = $_REQUEST['p'];
 
@@ -830,6 +852,12 @@ function nbvisiteur(){
     $count[1] = mysql_num_rows($res);
     $res = mysql_query("SELECT type FROM " . NBCONNECTE_TABLE . " WHERE type > 2");
     $count[2] = mysql_num_rows($res);
+	$res = mysql_query("SELECT type FROM " . NBCONNECTE_TABLE . " WHERE type = 3");
+    $count[5] = mysql_num_rows($res);
+	$res = mysql_query("SELECT type FROM " . NBCONNECTE_TABLE . " WHERE type BETWEEN 4 AND 7");
+    $count[6] = mysql_num_rows($res);
+	$res = mysql_query("SELECT type FROM " . NBCONNECTE_TABLE . " WHERE type >= 8");
+    $count[7] = mysql_num_rows($res);
     $count[3] = $count[1] + $count[2];
     $count[4] = $count[0] + $count[3];
     return $count;
@@ -1037,6 +1065,9 @@ function getOS(){
 
     $list_os = array(
         // Windows
+        'Windows NT 10'       => 'Windows 10',
+        'Windows NT 6.3'       => 'Windows 8.1',
+        'Windows NT 6.2'       => 'Windows 8.0',
         'Windows NT 6.1'       => 'Windows 7',
         'Windows NT 6.0'       => 'Windows Vista',
         'Windows NT 5.2'       => 'Windows Server 2003',
