@@ -752,6 +752,20 @@
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
+        case'mumble':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_mumble`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_mumble` (
+                            `name` varchar(255) collate latin1_general_ci NOT NULL default '',
+                            `mumble_jsonurl` text collate latin1_general_ci NOT NULL,
+                          PRIMARY KEY  (`name`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        
+                        $sql = "INSERT INTO `" . $db_prefix . "_modules` VALUES ('config', '');";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
         case'nbconnecte':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_nbconnecte`";
                         $req = mysql_query($sql) or die (mysql_error());                        
@@ -765,6 +779,20 @@
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
+        break;
+        case'nbconnect_jour':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_nbconnect_jour`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_nbconnect_jour` (
+                            `id` int(11) NOT NULL auto_increment,
+                            `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+                            `temps` bigint(20) NOT NULL default '0',
+                            `hier` varchar(10) collate latin1_general_ci NOT NULL default '',
+                            `record` varchar(10) collate latin1_general_ci NOT NULL default '',
+                            `ip` varchar(20) collate latin1_general_ci NOT NULL default '',
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
         break;
         case'news':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_news`";
@@ -1189,6 +1217,19 @@
                           `image` varchar(200) NOT NULL default '',
                           `couleur` varchar(6) NOT NULL default '',
                           `ordre` int(5) NOT NULL default '0',
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'themes_slide':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_themes_slide`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_themes_slide` (
+                            `id` int(11) NOT NULL auto_increment,
+                            `titre` text collate latin1_general_ci NOT NULL,
+                            `url` varchar(200) collate latin1_general_ci NOT NULL default '',
+                            `img` varchar(200) collate latin1_general_ci NOT NULL default '',
                           PRIMARY KEY  (`id`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
