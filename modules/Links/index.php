@@ -321,7 +321,7 @@ if ($visiteur >= $level_access && $level_access > -1){
 			echo '<tr style="background: ' . $bgcolor1 . '"><td style="border: 1px dashed ' . $bgcolor3 . '"><b>' . _VISIT . ' :</b> ' . $count . '&nbsp;' . _TIMES . '</td></tr>'."\n";
 			echo '<tr style="background: ' . $bgcolor1 . '"><td style="border: 1px dashed ' . $bgcolor3 . '"><b>PageRank actuel :</b>'."\n";
             echo '&nbsp;<img style="vertical-align:middle;" src="http://www.test-pagerank.com/pagerankCurrent.php?url='.$url.'&color=g" title="PageRank de '.$titre.'"/></a></td></tr>'."\n";	
-            echo '<tr style="background: ' . $bgcolor1 . '"><td style="border: 1px dashed ' . $bgcolor3 . '">Merci Ã  <a href="http://www.robothumb.com/">Robothumb</a>&nbsp;et&nbsp;<a href="http://www.test-pagerank.com/">PageRank</a></td></tr>'."\n";
+            echo '<tr style="background: ' . $bgcolor1 . '"><td style="border: 1px dashed ' . $bgcolor3 . '">Merci &aacute; <a href="http://www.robothumb.com/">Robothumb</a>&nbsp;et&nbsp;<a href="http://www.test-pagerank.com/">PageRank</a></td></tr>'."\n";
 			
 			if($visiteur >= nivo_mod('Vote') && nivo_mod('Vote') > -1){
 				echo '<tr style="background: ' . $bgcolor1 . '"><td style="border: 1px dashed ' . $bgcolor3 . '">';
@@ -396,13 +396,13 @@ if ($visiteur >= $level_access && $level_access > -1){
             . '<tr><td align="right"><small>' . _ORDERBY . ' : ';
 
             if ($_REQUEST['orderby'] == 'news') echo '<b>' . _DATE . '</b> | ';
-            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=news&amp;cat=' . $categorie . '">' . _DATE . '</a> | ';
+            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=news&amp;cat=' . $cat . '">' . _DATE . '</a> | ';
             if ($_REQUEST['orderby'] == 'count') echo '<b>' . _TOPFILE . '</b> | ';
-            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=count&amp;cat=' . $categorie . '">' . _TOPFILE . '</a> | ';
+            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=count&amp;cat=' . $cat . '">' . _TOPFILE . '</a> | ';
             if ($_REQUEST['orderby'] == 'name') echo '<b>' . _NAME . '</b> | ';
-            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=name&amp;cat=' . $categorie . '">' . _NAME . '</a> | ';
+            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=name&amp;cat=' . $cat . '">' . _NAME . '</a> | ';
             if ($_REQUEST['orderby'] == 'note') echo '<b>' . _NOTE . '</b>';
-            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=note&amp;cat=' . $categorie . '">' . _NOTE . '</a>';
+            else echo '<a href="index.php?file=Links&amp;op=' . $_REQUEST['op'] . '&amp;orderby=note&amp;cat=' . $cat . '">' . _NOTE . '</a>';
 
             echo '</small></td></tr></table>'."\n";
         }
@@ -484,12 +484,12 @@ if ($visiteur >= $level_access && $level_access > -1){
                        . "<tr style=\"background: " . $bgcolor1 . ";height: 140px;text-align: center;\"><td style=\"width: 170px;vertical-align: middle;\">" . $box . "</td><td style=\"vertical-align: top;\">\n"
                        . "<table style=\"text-align: left;\" width=\"100%\" cellspacing=\"1\" cellpadding=\"1\">\n"
                        . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;</td></tr>\n"
-                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<b>" . _ADDTHE . " :</b> " . nkDate($date) . "</td></tr>\n"
-                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<b>" . _CAT . " :</b> " . $namecat . "</td></tr>\n"
-                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<b>Webmaster :</b> " . $webmaster . "</td></tr>\n"
-                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<b>Commentaires :</b> " . $nb_comment . "</td></tr>\n"
-                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<b>" . _HITS . " :</b> " . $count . "&nbsp;" . _TIMES . "</td></tr>\n"
-					   . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;Â»&nbsp;<i>" . $texte . "</i></td></tr>\n"             
+                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<b>" . _ADDTHE . " :</b> " . nkDate($date) . "</td></tr>\n"
+                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<b>" . _CAT . " :</b> " . $namecat . "</td></tr>\n"
+                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<b>" . _WEBMASTER . " :</b> " . $webmaster . "</td></tr>\n"
+                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<b>" . _LINKCOMMENT . " :</b> " . $nb_comment . "</td></tr>\n"
+                       . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<b>" . _HITS . " :</b> " . $count . "&nbsp;" . _TIMES . "</td></tr>\n"
+					   . "<tr style=\"background: " . $bgcolor1 . ";\"><td>&nbsp;&nbsp;&raquo;&nbsp;<i>" . $texte . "</i></td></tr>\n"                
                        . "</td></tr></table>\n"
                        . "</td></tr></table><br />\n";
                 } 
