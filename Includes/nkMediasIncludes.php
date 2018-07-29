@@ -9,7 +9,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
  */
-
 if (!defined("INDEX_CHECK")) exit('You can\'t run this file alone.');
 
 function printMedias($jQuery = false){

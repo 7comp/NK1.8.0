@@ -1,7 +1,14 @@
 <?php
-// Redimensionnement
-// Proposé par cknight le 19/08/2005
-// http://www.asp-php.net/ressources/bouts_de_code.aspx?id=465
+/**
+ * @version     1.8
+ * @link http://www.nuked-klan.org Clan Management System for Gamers
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
+ *
+ * Redimensionnement
+ * Proposé par cknight le 19/08/2005
+ * http://www.asp-php.net/ressources/bouts_de_code.aspx?id=465
+ */
 if (!defined("INDEX_CHECK")){
 exit('You can\'t run this file alone.');
 }

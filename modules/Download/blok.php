@@ -1,11 +1,16 @@
 <?php
-// -------------------------------------------------------------------------//
-// Patch Block Téléchargement avec miniature, pour Nk v1.7.9.                               //
-// Peut se placer dans les blocks gauche, droite, centre et bas             //
-// Créé par Queytou24 sur l'idée de Ridik90.                                //
-// Entraide Pour Tous - Soutien Informatique                                //
-// http://www.entraide-pour-tous.fr.                                        //        
-// -------------------------------------------------------------------------//
+/**
+ * @version     1.8
+ * @link http://www.nuked-klan.org Clan Management System for Gamers
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
+ * 
+ * Patch Block Téléchargement avec miniature, pour Nk v1.7.9.
+ * Peut se placer dans les blocks gauche, droite, centre et bas
+ * Créé par Queytou24 sur l'idée de Ridik90.
+ * Entraide Pour Tous - Soutien Informatique
+ * http://www.entraide-pour-tous.fr.        
+ */
 if (!defined("INDEX_CHECK"))
 {
 	die ("<div style=\"text-align: center;\">You cannot open this page directly</div>");

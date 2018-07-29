@@ -5,7 +5,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
  */
-
 if(!defined('INDEX_CHECK')) die(header('HTTP/1.0 404 Not Found'));
 
 # Affichage du bloc

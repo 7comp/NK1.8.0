@@ -5,7 +5,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
  */
-
 if (!defined("INDEX_CHECK"))
 {
     die ("<div style=\"text-align: center;\">You cannot open this page directly</div>");

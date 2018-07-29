@@ -1,30 +1,32 @@
 <?php
-    /*  Block Google Traduction
-        By : sekuline <sekuline-at-gmail.com>
-        For : Nuked-KlaN v1.7.9 / SP4.6 */
+/**
+ * @version     1.8
+ * @link http://www.nuked-klan.org Clan Management System for Gamers
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
+ */
+defined('INDEX_CHECK') or die;
 
-    defined('INDEX_CHECK') or die;
-
-    function affich_block_traduction($blok) {
-        global $language;
+function affich_block_traduction($blok) {
+    global $language;
 
         $blok['content'] .= '<div id="google_translate_element" style="text-align: center"></div>'."\n"
         . '<script>'."\n"
-            . 'function googleTranslateElementInit() {'."\n"
-                . 'new google.translate.TranslateElement({'."\n"
-                    . 'pageLanguage: \'' . substr($language, 0,2) . '\','."\n"
-                    . 'autoDisplay: false,'."\n"
-                    . 'layout: google.translate.TranslateElement.InlineLayout.SIMPLE'."\n"
-                . '}, \'google_translate_element\');'."\n"
-            . '}'."\n"
+        . 'function googleTranslateElementInit() {'."\n"
+        . 'new google.translate.TranslateElement({'."\n"
+        . 'pageLanguage: \'' . substr($language, 0,2) . '\','."\n"
+        . 'autoDisplay: false,'."\n"
+        . 'layout: google.translate.TranslateElement.InlineLayout.SIMPLE'."\n"
+        . '}, \'google_translate_element\');'."\n"
+        . '}'."\n"
         . '</script>'."\n"
         . '<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>'."\n";
 
-        return $blok;
-    }
+    return $blok;
+}
 
-    function edit_block_traduction($bid) {
-        global $language;
+function edit_block_traduction($bid) {
+    global $language;
 
         $sql = mysql_query('SELECT active, position, titre, module, content, type, nivo, page FROM ' . BLOCK_TABLE . ' WHERE bid = ' . $bid);
         list($active, $position, $titre, $modul, $content, $type, $nivo, $pages) = mysql_fetch_array($sql);

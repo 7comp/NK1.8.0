@@ -5,7 +5,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright 2001-2015 Nuked-Klan (Registred Trademark)
  */
-
 if (eregi("blok.php", $_SERVER['PHP_SELF']))
 {
     die ("You cannot open this page directly");
