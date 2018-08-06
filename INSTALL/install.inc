@@ -4,12 +4,101 @@
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_action`";
                         $req = mysql_query($sql) or die (mysql_error());                        
                         $sql = "CREATE TABLE `" . $db_prefix . "_action` (
-                          `id` int(11) NOT NULL auto_increment,
-                          `date` varchar(30) NOT NULL default '0',
-                          `pseudo`  text NOT NULL,
-                          `action`  text NOT NULL,
-                          PRIMARY KEY  (`id`)
+                            `id` int(11) NOT NULL auto_increment,
+                            `date` varchar(30) NOT NULL default '0',
+                            `pseudo`  text NOT NULL,
+                            `action`  text NOT NULL,
+                            PRIMARY KEY  (`id`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'annonces':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_annonces`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_annonces` (
+                            `artid` int(11) NOT NULL auto_increment,
+                            `anid` int(11) NOT NULL default '0',
+                            `title` varchar(40) collate latin1_general_ci NOT NULL default '',
+                            `content` text collate latin1_general_ci NOT NULL,
+                            `counter` int(11) NOT NULL default '0',
+                            `pseudo` text collate latin1_general_ci NOT NULL,
+                            `email` varchar(40) collate latin1_general_ci NOT NULL default '',
+                            `ville` varchar(25) collate latin1_general_ci NOT NULL default '',
+                            `date` varchar(30) collate latin1_general_ci NOT NULL default '',
+                            `pays` varchar(30) collate latin1_general_ci NOT NULL default '',
+                            `prix` varchar(10) collate latin1_general_ci NOT NULL default '',
+                            `duree` varchar(30) collate latin1_general_ci NOT NULL default '',
+                            `active` char(1) collate latin1_general_ci NOT NULL default '',
+                            `obsol` varchar(30) collate latin1_general_ci NOT NULL default '',
+                            `url_screen` varchar(200) collate latin1_general_ci NOT NULL default '',
+                            PRIMARY KEY  (`artid`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'annonces_cat':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_annonces_cat`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_annonces_cat` (
+                            `anid` int(11) NOT NULL auto_increment,
+                            `parentid` int(11) NOT NULL default '0',
+                            `anname` varchar(40) collate latin1_general_ci NOT NULL default '',
+                            `foto` varchar(80) collate latin1_general_ci NOT NULL default '',
+                          PRIMARY KEY  (`anid`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'banlist':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_banlist`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_banlist` (
+                            `id` int(11) NOT NULL auto_increment,
+                            `identifiant` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `pseudo` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `admin` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `date` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `serveur` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `record` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'banlist_config':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_banlist_config`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_banlist_config` (
+                            `id` int(11) NOT NULL auto_increment,
+                            `iden` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison1` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison2` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison3` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison4` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison5` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison6` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison7` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison8` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison9` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `raison10` varchar(50) collate latin1_general_ci NOT NULL default '',
+                            `serveur1` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur2` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur3` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur4` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur5` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur6` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur7` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur8` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur9` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            `serveur10` varchar(100) collate latin1_general_ci NOT NULL default '',
+                            PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+
+                        $sql = "INSERT INTO `" . $db_prefix . "_banlist_config` VALUES
+                            (1, 'identifiant', 'raison1', 'raison2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -57,7 +146,9 @@
                             (8, 0, 0, 'Server', '" . _SERVERMONITOR . "', '', 'module', 0, 'Tous'),
                             (9, 0, 0, '', '" . _SUGGEST . "', '', 'suggest', 1, 'Tous'),
                             (10, 0, 0, 'Textbox', '" . _BLOKSHOUT . "', '', 'module', 0, 'Tous'),
-                            (11, 1, 4, '', '" . _BLOKPARTNERS . "', '<div style=\"text-align: center;padding: 10px;\"><a href=\"http://www.nuked-klan.org\" onclick=\"window.open(this.href); return false;\"><img style=\"border: 0;\" src=\"images/ban.png\" alt=\"\" title=\"Nuked-klaN CMS\" /></a></div><div style=\"text-align: center;padding: 10px;\"><a href=\"http://www.nitroserv.fr\" onclick=\"window.open(this.href); return false;\"><img style=\"border: 0;\" src=\"images/nitroserv.png\" alt=\"\" title=\"Location de serveurs de jeux\" /></a></div>', 'html', 0, 'Tous');";
+                            (11, 1, 4, '', '" . _BLOKPARTNERS . "', '<div style=\"text-align: center;padding: 10px;\"><a href=\"http://www.nuked-klan.org\" onclick=\"window.open(this.href); return false;\"><img style=\"border: 0;\" src=\"images/ban.png\" alt=\"\" title=\"Nuked-klaN CMS\" /></a></div><div style=\"text-align: center;padding: 10px;\"><a href=\"http://www.nitroserv.fr\" onclick=\"window.open(this.href); return false;\"><img style=\"border: 0;\" src=\"images/nitroserv.png\" alt=\"\" title=\"Location de serveurs de jeux\" /></a></div>', 'html', 0, 'Tous'),
+                            (12, 1, 0, 'Video', 'Nos videos', '', 'module', 0, 'Tous'),
+                            (13, 4, 0, 'Tags', 'Nuage de mots', '', 'module', 0, 'Tous');";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -115,7 +206,9 @@
                             (4, 'survey', 1),
                             (5, 'wars', 1),
                             (6, 'gallery', 1),
-                            (7, 'sections', 1);";
+                            (7, 'sections', 1),
+                            (8, 'gallery_v2', 1),
+                            (9, 'video', 0);;";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -245,7 +338,12 @@
                             ('user_social_level', '0'),
                             ('sp_version', 'off'),
                             ('index_page', ''),
-                            ('editor_type', 'cke');";
+                            ('editor_type', 'cke'),
+                            ('Guestbookpost', '0'),
+                            ('Guestbooktemplate', '0'),
+                            ('max_video', '10'),
+                            ('cat_idem', '0'),
+                            ('tags', 'keyword');";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -357,6 +455,32 @@
                           `lien`  text NOT NULL,
                           `texte`  text NOT NULL,
                           PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql);
+                        echo 'OK';
+        break;
+        case'faqs':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_faqs`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_faqs` (
+                          `id` int(10) NOT NULL auto_increment,
+                          `questions` text NOT NULL,
+                          `reponses` text NOT NULL,
+                          `cat` int(11) NOT NULL default '0',
+                          PRIMARY KEY  (`id`),
+                          KEY `cat` (`cat`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql);
+                        echo 'OK';
+        break;
+        case'faqs_cat':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_faqs_cat`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_faqs_cat` (
+                          `cid` int(11) NOT NULL auto_increment,
+                          `titre` varchar(50) NOT NULL default '',
+                          PRIMARY KEY  (`cid`),
+                          KEY `titre` (`titre`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql);
                         echo 'OK';
@@ -562,6 +686,79 @@
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
+        case'gallery_v2':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2` (
+                          `sid` int(11) NOT NULL auto_increment,
+                          `titre` text NOT NULL,
+                          `description` text NOT NULL,
+                          `url` varchar(200) NOT NULL default '',
+                          `url_file` varchar(200) NOT NULL default '',
+                          `cat` int(11) NOT NULL default '0',
+                          `date` varchar(12) NOT NULL default '',
+                          `count` int(10) NOT NULL default '0',
+                          `count_dl` int(10) NOT NULL default '0',
+                          `autor` text NOT NULL,
+                          `level` int(1) NOT NULL default '0',
+                          `type` varchar(50) NOT NULL,
+                          `statut` int(1) NOT NULL default '0',
+                          `taille` varchar(6) NOT NULL,
+                          `mot_cle` text NOT NULL,
+                          `actif` int(1) NOT NULL default '0',
+                          PRIMARY KEY  (`sid`),
+                          KEY `cat` (`cat`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'gallery_v2_cat':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2_cat`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2_cat` (
+                          `cid` int(11) NOT NULL auto_increment,
+                          `parentid` int(11) NOT NULL default '0',
+                          `titre` varchar(50) NOT NULL default '',
+                          `image` varchar(50) NOT NULL,
+                          `description` text NOT NULL,
+                          `position` int(2) unsigned NOT NULL default '0',
+                          `level` int(1) NOT NULL default '0',
+                          PRIMARY KEY  (`cid`),
+                          KEY `parentid` (`parentid`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'gallery_v2_config':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2_config`";
+                        $req = mysql_query($sql) or die(mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2_config` (
+                          `name` varchar(255) NOT NULL,
+                          `value` text NOT NULL,
+                          PRIMARY KEY  (`name`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        
+                        $sql = "INSERT INTO `" . $db_prefix . "_gallery_v2_config` VALUES
+                            ('mess_admin_page', '20'),
+                            ('color_player', '5D6953'),
+                            ('max_cat', '9'),
+                            ('rep_img', 'upload/Gallery_v2/'),
+                            ('mess_guest_page', '6'),
+                            ('aff_prev_next', 'off'),
+                            ('title', ''),
+                            ('dl_lvl', '1'),
+                            ('dl_ok', 'on'),
+                            ('suggest', '1'),
+                            ('max_size', '5'),
+                            ('lvl_suggest', '1'),
+                            ('dl_zip', '0'),
+                            ('lvl_dl_zip', '9'),
+                            ('make_thumb', '0'),
+                            ('block_type', '1');";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
         case'games':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_games`";
                         $req = mysql_query($sql) or die (mysql_error());                        
@@ -748,7 +945,15 @@
                             (21, 'Stats', 0, 2),
                             (22, 'Contact', 0, 3),
                             (23, 'Equipe', 0, 2),
-                            (24, 'Page', 0, 9);";
+                            (24, 'Page', 0, 9),
+							(25, 'Gallery_v2', 0, 9),
+                            (26, 'Video', 0, 9),
+                            (27, 'Faqs', 0, 3),
+                            (28, 'Email', 9, 9),
+                            (29, 'Ticket', 0, 9),
+                            (30, 'Reglement', 0, 9),
+                            (31, 'Tags', '0', '3'),
+                            (32, 'myliens', 0, 9);";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -762,7 +967,7 @@
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
                         
-                        $sql = "INSERT INTO `" . $db_prefix . "_modules` VALUES ('config', '');";
+                        $sql = "INSERT INTO `" . $db_prefix . "_mumble` VALUES ('config', '');";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -784,15 +989,16 @@
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_nbconnect_jour`";
                         $req = mysql_query($sql) or die (mysql_error());                        
                         $sql = "CREATE TABLE `" . $db_prefix . "_nbconnect_jour` (
-                            `id` int(11) NOT NULL auto_increment,
-                            `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
-                            `temps` bigint(20) NOT NULL default '0',
-                            `hier` varchar(10) collate latin1_general_ci NOT NULL default '',
-                            `record` varchar(10) collate latin1_general_ci NOT NULL default '',
-                            `ip` varchar(20) collate latin1_general_ci NOT NULL default '',
+                          `id` int(11) NOT NULL auto_increment,
+                          `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+                          `temps` bigint(20) NOT NULL default '0',
+                          `hier` varchar(10) collate latin1_general_ci NOT NULL default '',
+                          `record` varchar(10) collate latin1_general_ci NOT NULL default '',
+                          `ip` varchar(20) collate latin1_general_ci NOT NULL default '',
                           PRIMARY KEY  (`id`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
         break;
         case'news':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_news`";
@@ -888,6 +1094,36 @@
                           `comment` text NOT NULL,
                           PRIMARY KEY  (`id`),
                           KEY `game` (`game`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'reglement':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_reglement`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_reglement` (
+                          `id` int(11) NOT NULL auto_increment,
+                          `titre` varchar(200) collate latin1_general_ci NOT NULL,
+                          `lien` varchar(255) collate latin1_general_ci NOT NULL,
+                          `niveau` int(2) NOT NULL,
+                          `largeur` varchar(10) collate latin1_general_ci NOT NULL,
+                          `valeur` int(1) NOT NULL,
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'reglement_details':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_reglement_details`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_reglement_details` (
+                          `id` int(12) NOT NULL auto_increment,
+                          `id_reglement` int(5) NOT NULL,
+                          `titre` text collate latin1_general_ci NOT NULL,
+                          `contenu` text collate latin1_general_ci NOT NULL,
+                          `ordre` int(5) NOT NULL,
+                          PRIMARY KEY  (`id`),
+                          KEY `id_reglement` (`id_reglement`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
@@ -1133,7 +1369,8 @@
                             ('Server', 'pages', 0),
                             ('Members', 'pages', 0),
                             ('Team', 'pages', 0),
-                            ('Forum', 'pages', 0);";
+                            ('Forum', 'pages', 0),
+                            ('Gallery_v2', 'pages', 0);";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -1222,6 +1459,51 @@
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
+        case'ticket':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_ticket`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_ticket` (
+                          `id` int(11) NOT NULL auto_increment,
+                          `backadmin` char(6) collate latin1_general_ci NOT NULL,
+                          `backuser` char(6) collate latin1_general_ci NOT NULL,
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+
+                        $sql = "INSERT INTO `" . $db_prefix . "_ticket` VALUES (1, '', '');";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'ticket_msg':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_ticket_msg`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_ticket_msg` (
+                          `aleatoire` varchar(10) collate latin1_general_ci NOT NULL,
+                          `message` text collate latin1_general_ci NOT NULL,
+                          `date` varchar(30) collate latin1_general_ci NOT NULL,
+                          `author` text collate latin1_general_ci NOT NULL,
+                          KEY `aleatoire` (`aleatoire`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'ticket_send':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_ticket_send`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql = "CREATE TABLE `" . $db_prefix . "_ticket_send` (
+                            `id` int(11) NOT NULL auto_increment,
+                          `author` text collate latin1_general_ci NOT NULL,
+                          `email` char(80) collate latin1_general_ci NOT NULL,
+                          `objet` text collate latin1_general_ci NOT NULL,
+                          `service` text collate latin1_general_ci NOT NULL,
+                          `aleatoire` text collate latin1_general_ci NOT NULL,
+                          `date` varchar(30) collate latin1_general_ci NOT NULL,
+                          `statut` varchar(6) collate latin1_general_ci NOT NULL,
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
         case'themes_slide':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_themes_slide`";
                         $req = mysql_query($sql) or die (mysql_error());                        
@@ -1243,7 +1525,7 @@
                             `session_vars` text NOT NULL,
                             `session_start` bigint(20) NOT NULL,
                             PRIMARY KEY (`session_id`)
-                            ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -1339,6 +1621,36 @@
                           `pref_4` text NOT NULL,
                           `pref_5` text NOT NULL,
                           PRIMARY KEY  (`user_id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'video':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_video`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql="CREATE TABLE `" . $db_prefix . "_video` (
+                          `id` int(11) NOT NULL auto_increment,
+                          `cat_id` text collate latin1_general_ci NOT NULL,
+                          `type` text collate latin1_general_ci NOT NULL,
+                          `titre` text collate latin1_general_ci NOT NULL,
+                          `description` text collate latin1_general_ci NOT NULL,
+                          `image` text collate latin1_general_ci NOT NULL,
+                          `status` text collate latin1_general_ci NOT NULL,
+                          `lien` text collate latin1_general_ci NOT NULL,
+                          `vue` text collate latin1_general_ci NOT NULL,
+                          PRIMARY KEY  (`id`)
+                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
+                        $req = mysql_query($sql) or die (mysql_error());
+                        echo 'OK';
+        break;
+        case'video_cat':
+                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_video_cat`";
+                        $req = mysql_query($sql) or die (mysql_error());                        
+                        $sql="CREATE TABLE `" . $db_prefix . "_video_cat` (
+                            `idcat` int(11) NOT NULL auto_increment,
+                            `categorie` text collate latin1_general_ci NOT NULL,
+                            `statuscat` text collate latin1_general_ci NOT NULL,
+                          PRIMARY KEY  (`idcat`)
                         ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
