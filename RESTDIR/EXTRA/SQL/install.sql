@@ -863,88 +863,6 @@ CREATE TABLE IF NOT EXISTS `nuked_gallery_cat` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nuked_gallery_v2`
---
-
-DROP TABLE IF EXISTS `nuked_gallery_v2`;
-CREATE TABLE IF NOT EXISTS `nuked_gallery_v2` (
-  `sid` int(11) NOT NULL auto_increment,
-  `titre` text NOT NULL,
-  `description` text NOT NULL,
-  `url` varchar(200) NOT NULL default '',
-  `url_file` varchar(200) NOT NULL default '',
-  `cat` int(11) NOT NULL default '0',
-  `date` varchar(12) NOT NULL default '',
-  `count` int(10) NOT NULL default '0',
-  `count_dl` int(10) NOT NULL default '0',
-  `autor` text NOT NULL,
-  `level` int(1) NOT NULL default '0',
-  `type` varchar(50) NOT NULL,
-  `statut` int(1) NOT NULL default '0',
-  `taille` varchar(6) NOT NULL,
-  `mot_cle` text NOT NULL,
-  `actif` int(1) NOT NULL default '0',
-  PRIMARY KEY  (`sid`),
-  KEY `cat` (`cat`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `nuked_gallery_v2_cat`
---
-
-DROP TABLE IF EXISTS `nuked_gallery_v2_cat`;
-CREATE TABLE IF NOT EXISTS `nuked_gallery_v2_cat` (
-  `cid` int(11) NOT NULL auto_increment,
-  `parentid` int(11) NOT NULL default '0',
-  `titre` varchar(50) NOT NULL default '',
-  `image` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  `position` int(2) unsigned NOT NULL default '0',
-  `level` int(1) NOT NULL default '0',
-  PRIMARY KEY  (`cid`),
-  KEY `parentid` (`parentid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `nuked_gallery_v2_config`
---
-
-DROP TABLE IF EXISTS `nuked_gallery_v2_config`;
-CREATE TABLE IF NOT EXISTS `nuked_gallery_v2_config` (
-  `name` varchar(255) NOT NULL,
-  `value` text NOT NULL,
-  PRIMARY KEY  (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `nuked_gallery_v2_config`
---
-
-INSERT INTO `nuked_gallery_v2_config` (`name`, `value`) VALUES
-('mess_admin_page', '20'),
-('color_player', '5D6953'),
-('max_cat', '9'),
-('rep_img', 'upload/Gallery_v2/'),
-('mess_guest_page', '6'),
-('aff_prev_next', 'off'),
-('title', ''),
-('dl_lvl', '1'),
-('dl_ok', 'on'),
-('suggest', '1'),
-('max_size', '5'),
-('lvl_suggest', '1'),
-('dl_zip', '0'),
-('lvl_dl_zip', '9'),
-('make_thumb', '0'),
-('block_type', '1');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `nuked_games`
 --
 
@@ -1172,10 +1090,9 @@ INSERT INTO `nuked_modules` (`id`, `nom`, `niveau`, `admin`) VALUES
 (39, 'Tags', '0', '3'),
 (40, 'myliens', 0, 9),
 (41, 'Steam_ban', 0, 9),
-(42, 'Gallery_v2', 0, 9),
-(43, 'Strats', '3', '7'),
-(44, 'Espace_membre', 1, 9),
-(45, 'Private_Message', 9, 9);
+(42, 'Strats', '3', '7'),
+(43, 'Espace_membre', 1, 9),
+(44, 'Private_Message', 9, 9);
 
 -- --------------------------------------------------------
 

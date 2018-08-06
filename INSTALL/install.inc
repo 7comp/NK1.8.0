@@ -207,8 +207,7 @@
                             (5, 'wars', 1),
                             (6, 'gallery', 1),
                             (7, 'sections', 1),
-                            (8, 'gallery_v2', 1),
-                            (9, 'video', 0);;";
+                            (8, 'video', 0);";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -686,79 +685,6 @@
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
-        case'gallery_v2':
-                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2`";
-                        $req = mysql_query($sql) or die (mysql_error());                        
-                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2` (
-                          `sid` int(11) NOT NULL auto_increment,
-                          `titre` text NOT NULL,
-                          `description` text NOT NULL,
-                          `url` varchar(200) NOT NULL default '',
-                          `url_file` varchar(200) NOT NULL default '',
-                          `cat` int(11) NOT NULL default '0',
-                          `date` varchar(12) NOT NULL default '',
-                          `count` int(10) NOT NULL default '0',
-                          `count_dl` int(10) NOT NULL default '0',
-                          `autor` text NOT NULL,
-                          `level` int(1) NOT NULL default '0',
-                          `type` varchar(50) NOT NULL,
-                          `statut` int(1) NOT NULL default '0',
-                          `taille` varchar(6) NOT NULL,
-                          `mot_cle` text NOT NULL,
-                          `actif` int(1) NOT NULL default '0',
-                          PRIMARY KEY  (`sid`),
-                          KEY `cat` (`cat`)
-                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
-                        $req = mysql_query($sql) or die (mysql_error());
-                        echo 'OK';
-        break;
-        case'gallery_v2_cat':
-                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2_cat`";
-                        $req = mysql_query($sql) or die (mysql_error());                        
-                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2_cat` (
-                          `cid` int(11) NOT NULL auto_increment,
-                          `parentid` int(11) NOT NULL default '0',
-                          `titre` varchar(50) NOT NULL default '',
-                          `image` varchar(50) NOT NULL,
-                          `description` text NOT NULL,
-                          `position` int(2) unsigned NOT NULL default '0',
-                          `level` int(1) NOT NULL default '0',
-                          PRIMARY KEY  (`cid`),
-                          KEY `parentid` (`parentid`)
-                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
-                        $req = mysql_query($sql) or die (mysql_error());
-                        echo 'OK';
-        break;
-        case'gallery_v2_config':
-                        $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_gallery_v2_config`";
-                        $req = mysql_query($sql) or die(mysql_error());                        
-                        $sql = "CREATE TABLE `" . $db_prefix . "_gallery_v2_config` (
-                          `name` varchar(255) NOT NULL,
-                          `value` text NOT NULL,
-                          PRIMARY KEY  (`name`)
-                        ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
-                        $req = mysql_query($sql) or die (mysql_error());
-                        
-                        $sql = "INSERT INTO `" . $db_prefix . "_gallery_v2_config` VALUES
-                            ('mess_admin_page', '20'),
-                            ('color_player', '5D6953'),
-                            ('max_cat', '9'),
-                            ('rep_img', 'upload/Gallery_v2/'),
-                            ('mess_guest_page', '6'),
-                            ('aff_prev_next', 'off'),
-                            ('title', ''),
-                            ('dl_lvl', '1'),
-                            ('dl_ok', 'on'),
-                            ('suggest', '1'),
-                            ('max_size', '5'),
-                            ('lvl_suggest', '1'),
-                            ('dl_zip', '0'),
-                            ('lvl_dl_zip', '9'),
-                            ('make_thumb', '0'),
-                            ('block_type', '1');";
-                        $req = mysql_query($sql) or die (mysql_error());
-                        echo 'OK';
-        break;
         case'games':
                         $sql = "DROP TABLE IF EXISTS `" . $db_prefix . "_games`";
                         $req = mysql_query($sql) or die (mysql_error());                        
@@ -946,14 +872,13 @@
                             (22, 'Contact', 0, 3),
                             (23, 'Equipe', 0, 2),
                             (24, 'Page', 0, 9),
-							(25, 'Gallery_v2', 0, 9),
-                            (26, 'Video', 0, 9),
-                            (27, 'Faqs', 0, 3),
-                            (28, 'Email', 9, 9),
-                            (29, 'Ticket', 0, 9),
-                            (30, 'Reglement', 0, 9),
-                            (31, 'Tags', '0', '3'),
-                            (32, 'myliens', 0, 9);";
+                            (25, 'Video', 0, 9),
+                            (26, 'Faqs', 0, 3),
+                            (27, 'Email', 9, 9),
+                            (28, 'Ticket', 0, 9),
+                            (29, 'Reglement', 0, 9),
+                            (30, 'Tags', '0', '3'),
+                            (31, 'myliens', 0, 9);";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;
@@ -1369,8 +1294,7 @@
                             ('Server', 'pages', 0),
                             ('Members', 'pages', 0),
                             ('Team', 'pages', 0),
-                            ('Forum', 'pages', 0),
-                            ('Gallery_v2', 'pages', 0);";
+                            ('Forum', 'pages', 0);";
                         $req = mysql_query($sql) or die (mysql_error());
                         echo 'OK';
         break;

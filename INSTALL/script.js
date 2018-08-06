@@ -5,8 +5,8 @@ var ajaxBusy = false;
 var arrayTablesInstall = new Array(
                             "action", "annonces", "banlist", "banlist_config", "banned", "block", "calendar", "comment", "comment_mod", "config", "contact", "defie", "discussion", "downloads",
                             "downloads_cat", "erreursql", "forums", "forums_cat", "forums_messages", "forums_threads", "forums_rank",
-                            "faqs", "faqs_cat", "forums_reads", "forums_poll", "forums_options", "forums_vote", "gallery", "gallery_cat", "gallery_v2", "gallery_v2_cat", "gallery_v2_config", "games",
-							"games_prefs", "guestbook", "irc_awards", "liens", "liens_cat", "match", "match_files", "modules", "mumble", "nbconnecte", "nbconnect_jour", "news", "news_cat",
+                            "faqs", "faqs_cat", "forums_reads", "forums_poll", "forums_options", "forums_vote", "gallery", "gallery_cat", "games", "games_prefs", "guestbook", "irc_awards",
+                            "liens", "liens_cat", "match", "match_files", "modules", "mumble", "nbconnecte", "nbconnect_jour", "news", "news_cat",
 							"notification", "page", "recrute", "reglement", "reglement_details", "sections", "sections_cat", "serveur", "serveur_cat", "sessions", "smilies", "sondage",
 							"sondage_check", "sondage_data", "staff", "staff_cat", "staff_rang", "staff_status", "stats", "stats_visitor", "suggest", "shoutbox", "team", "team_rank",
 							"ticket", "ticket_msg", "ticket_send", "themes_slide", "tmpses", "userbox", "users", "users_detail", "video", "video_cat", "vote"

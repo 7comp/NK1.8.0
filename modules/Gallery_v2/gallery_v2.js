@@ -1,1 +1,0 @@
-document.write('<link rel="stylesheet" type="text/css" href="modules/Gallery_v2/gallery_v2.css">');
